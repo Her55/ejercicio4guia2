@@ -40,6 +40,8 @@ public class jIProductos extends javax.swing.JInternalFrame {
         jtStock = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 255));
         jLabel1.setText("Gestion de productos");
