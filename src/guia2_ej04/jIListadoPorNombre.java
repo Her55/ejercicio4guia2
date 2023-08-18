@@ -110,8 +110,7 @@ private void armarCabecera(){
     modelo.addColumn("Código");
     modelo.addColumn("Descripcion");
     modelo.addColumn("Precio");
-    modelo.addColumn("Stock");
-    
+    modelo.addColumn("Stock");    
     jTablaNobres.setModel(modelo);
     
 }

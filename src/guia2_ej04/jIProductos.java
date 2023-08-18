@@ -5,17 +5,23 @@
  */
 package guia2_ej04;
 
+import java.util.Iterator;
+import java.util.TreeSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lucas E. Sayago
  */
 public class jIProductos extends javax.swing.JInternalFrame {
-
+    public static TreeSet<Producto> productoList=new TreeSet();
     /**
      * Creates new form jIProductos
      */
     public jIProductos() {
         initComponents();
+        LlenarComboBox();
+        pruebaCargaManual();
     }
 
     /**
@@ -39,6 +45,12 @@ public class jIProductos extends javax.swing.JInternalFrame {
         jcRubro = new javax.swing.JComboBox<>();
         jtStock = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
+
+        setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 255));
@@ -54,9 +66,40 @@ public class jIProductos extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Stock");
 
-        jcRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", " " }));
-
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
+
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +134,15 @@ public class jIProductos extends javax.swing.JInternalFrame {
                             .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtStock))))
                 .addContainerGap(78, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jbNuevo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbSalir))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,11 +174,51 @@ public class jIProductos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbNuevo)
+                    .addComponent(jbGuardar)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbSalir)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        jtDescripcion.setText("");
+        jtPrecio.setText("");
+        jtStock.setText("");
+        try{
+        if (!jtCodigo.getText().isEmpty()) {
+            BuscarProducto(Integer.parseInt(jtCodigo.getText()));
+            if(jtStock.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "No se encontro el producto");
+            }
+        }else {
+            JOptionPane.showMessageDialog(this, "Ingrese el codigo");            
+        }
+        }catch (Exception n){
+            JOptionPane.showMessageDialog(this,"Ocurrio un error al intentar buscar: "+jtCodigo.getText(),"ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        GuardarProducto();
+        LimpiarCampos();
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        LimpiarCampos();
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        EliminarProducto();
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -137,10 +229,76 @@ public class jIProductos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JComboBox<String> jcRubro;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<Rubro> jcRubro;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtDescripcion;
     private javax.swing.JTextField jtPrecio;
     private javax.swing.JTextField jtStock;
     // End of variables declaration//GEN-END:variables
+    
+    private void LlenarComboBox(){
+        Rubro[] tipoRubroList = Rubro.values();
+        for (Rubro categoria : tipoRubroList) {
+            jcRubro.addItem(categoria);
+        }
+    }
+    private void GuardarProducto(){      
+        try {
+            if (jtCodigo!=null && !jtDescripcion.getText().isEmpty()&& jtPrecio!=null && jtStock!=null) {
+            int codigo = Integer.parseInt(jtCodigo.getText());
+            String descripcion = jtDescripcion.getText();
+            double precio = Double.parseDouble(jtPrecio.getText());
+            int stock = Integer.parseInt(jtStock.getText());
+            Rubro rubro = (Rubro) jcRubro.getSelectedItem();
+            Producto p = new Producto(codigo, descripcion, precio, stock, rubro);
+            productoList.add(p);
+            JOptionPane.showMessageDialog(this, "El producto se guardo correctamente");
+            }else{
+            JOptionPane.showMessageDialog(this, "Hay un campo vacio");
+                    }
+        } catch (Exception n) {
+            JOptionPane.showMessageDialog(this, "Error");
+        }
+    }        
+    private void BuscarProducto(int codigo){        
+        for (Producto producto : productoList) {            
+            if (producto.getCodigo()==codigo) {                
+                jtDescripcion.setText(producto.getDescripcion());
+                jtPrecio.setText(String.valueOf(producto.getPrecio()));
+                jtStock.setText(String.valueOf(producto.getStock()));
+                jcRubro.setSelectedItem(producto.getCategoria());
+                break;
+            }                        
+        }
+        
+    }
+    private void LimpiarCampos(){
+        jtCodigo.setText("");
+        jtDescripcion.setText("");
+        jtPrecio.setText("");
+        jtStock.setText("");
+    }
+    private void EliminarProducto(){
+        int codigo=Integer.parseInt(jtCodigo.getText());
+        for (Producto producto : productoList) {
+            if (producto.getCodigo()==codigo) {                
+                productoList.remove(producto);
+            }
+        }
+        JOptionPane.showMessageDialog(this, "El producto se elimino correctamente");
+        LimpiarCampos();
+    }
+    private void pruebaCargaManual(){
+        Producto p = new Producto(1, "Yerba Mate", 750.50, 20, Rubro.COMESTIBLE);
+        productoList.add(p);
+        Producto v = new Producto(2, "balde", 1000.00, 10, Rubro.LIMPIEZA);
+        productoList.add(v);
+        Producto s = new Producto(3, "perfume", 10000.00, 10, Rubro.PERFUMERIA);
+        productoList.add(s);
+    }
+
 }

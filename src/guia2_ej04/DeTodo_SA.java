@@ -5,12 +5,14 @@
  */
 package guia2_ej04;
 
+import java.util.TreeSet;
+
 /**
  *
  * @author Lucas E. Sayago
  */
 public class DeTodo_SA extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form DeTodo_SA
      */
@@ -112,44 +114,32 @@ public class DeTodo_SA extends javax.swing.JFrame {
 
     private void jMConsultaPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMConsultaPorNombreActionPerformed
         // limpiamos pantalla
-        jDEscritorio.removeAll();
-        
+        jDEscritorio.removeAll();        
         //se redibuja
-        jDEscritorio.repaint();
-     
+        jDEscritorio.repaint();     
         //instanciamos un objeto del tipo de J internal Frame
-     jIListadoPorNombre bpn= new jIListadoPorNombre();
-     
-     
-     // lo hacemos visible
-     bpn.setVisible(true);
-     
-     // agregamos al escritorio nuestro
-     jDEscritorio.add(bpn);
-     
-     // lo pones adelante
-     jDEscritorio.moveToFront(bpn);
+        jIListadoPorNombre bpn= new jIListadoPorNombre();     
+        // lo hacemos visible
+        bpn.setVisible(true);     
+        // agregamos al escritorio nuestro
+        jDEscritorio.add(bpn);     
+        // lo pones adelante
+        jDEscritorio.moveToFront(bpn);
     }//GEN-LAST:event_jMConsultaPorNombreActionPerformed
 
     private void jMProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMProductoActionPerformed
-         // limpiamos pantalla
+        // limpiamos pantalla
         jDEscritorio.removeAll();
-        
         //se redibuja
         jDEscritorio.repaint();
-     
         //instanciamos un objeto del tipo de J internal Frame
-     jIProductos bpn= new jIProductos();
-     
-     
-     // lo hacemos visible
-     bpn.setVisible(true);
-     
-     // agregamos al escritorio nuestro
-     jDEscritorio.add(bpn);
-     
-     // lo pones adelante
-     jDEscritorio.moveToFront(bpn);
+        jIProductos bpn = new jIProductos();
+        // lo hacemos visible
+        bpn.setVisible(true);
+        // agregamos al escritorio nuestro
+        jDEscritorio.add(bpn);
+        // lo pones adelante
+        jDEscritorio.moveToFront(bpn);
     }//GEN-LAST:event_jMProductoActionPerformed
 
     /**
@@ -197,4 +187,7 @@ public class DeTodo_SA extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
+    public void GuardarProductos(){
+        
+    }
 }

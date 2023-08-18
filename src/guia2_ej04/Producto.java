@@ -13,7 +13,7 @@ public class Producto implements Comparable<Producto>{
     private String descripcion;
     private double precio;
     private int stock;
-    private Rubro categoria;
+    public Rubro categoria;
 
     public Producto(int codigo, String descripcion, double precio, int stock, Rubro categoria) {
         this.codigo = codigo;
@@ -75,7 +75,4 @@ public class Producto implements Comparable<Producto>{
            return -1;
        }
     }
-    
-    
-
 }
