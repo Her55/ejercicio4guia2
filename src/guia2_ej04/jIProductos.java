@@ -52,6 +52,8 @@ public class jIProductos extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 255));
         jLabel1.setText("Gestion de productos");
